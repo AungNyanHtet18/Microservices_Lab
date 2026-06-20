@@ -1,7 +1,12 @@
 spring:
     application:
           name: api-gateway
-    
+
+    data: 
+       redis:
+        host: localhost
+        port: 6379
+
     cloud:
           gateway:
             routes:
@@ -11,6 +16,12 @@ spring:
                 - Path=/users/**
                 filters:
                 - StripPrefix=1
+       
+                # Rate Limiter (Now Properly Bound To Bean)
+                - name: RequestRateLimiter
+                  args:
+                    rate-limiter: "#{@redisRateLimiter}"
+                    key-resolver: "#{@userKeyResolver}"
 
                 # Retry First
                 - name: Retry
@@ -36,7 +47,13 @@ spring:
                 - Path=/orders/**
                 filters:
                 - StripPrefix=1
-                
+
+                # Rate Limiter (Now Properly Bound To Bean)
+                - name: RequestRateLimiter
+                  args:
+                      rate-limiter: "#{@redisRateLimiter}"
+                      key-resolver: "#{@userKeyResolver}"
+
                 # Circuit Breaker Only                
                 - name: CircuitBreaker
                   args:
