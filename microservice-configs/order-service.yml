@@ -1,0 +1,9 @@
+spring:
+    application:
+          name: order-service
+
+server:
+   port: 0
+
+custom: 
+   message: Hello Order Service Config

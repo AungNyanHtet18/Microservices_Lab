@@ -1,0 +1,9 @@
+spring:
+    application:
+          name: user-service
+
+server:
+   port: 0
+
+custom: 
+   message: Hello User Service Config
