@@ -2,6 +2,8 @@ package com.dev.anh.user_service;
 
 import java.time.LocalTime;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,6 +13,9 @@ import jakarta.servlet.http.HttpServletRequest;
 public class UserServiceController {
 
 	private AtomicInteger counter = new AtomicInteger(0);
+	
+	@Value("${custom.message}")
+	private String message;
 	
 	@GetMapping("/")
 	public String users(HttpServletRequest request) {
@@ -44,9 +49,13 @@ public class UserServiceController {
 		}
 		
 		counter.set(0);
-			
 		return "Service recovered!";
-		
 	}
+	
+	@GetMapping("/user-config")
+	public String config() {
+		 return message;
+	}
+	
 	
 }
