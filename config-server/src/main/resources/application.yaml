@@ -7,7 +7,7 @@ spring:
      config:
       server:
         git:
-          uri: https://github.com/AungNyanHtet18/Config-Server.git
+          uri: https://github.com/AungNyanHtet18/Config-Service.git
 
 server:
    port: 8888   
